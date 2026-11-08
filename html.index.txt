@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JobSphere | Find Your Career</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background: #f8f6ff;
+    color: #29213d;
+}
+
+/* NAVBAR */
+nav {
+    background: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 15px #ddd;
+}
+
+.logo {
+    color: #7028c5;
+    font-size: 27px;
+    font-weight: bold;
+}
+
+nav a {
+    text-decoration: none;
+    color: #49385f;
+    margin-left: 25px;
+    font-weight: 600;
+}
+
+/* HERO */
+.hero {
+    background: linear-gradient(135deg, #6825b5, #a56bea);
+    color: white;
+    text-align: center;
+    padding: 75px 20px;
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 17px;
+    margin-bottom: 25px;
+}
+
+.hero button {
+    background: white;
+    color: #7028c5;
+    border: none;
+    padding: 13px 28px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* MAIN */
+.container {
+    width: 86%;
+    max-width: 1200px;
+    margin: 45px auto;
+}
+
+/* POST FORM */
+.form-section {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px #e5dcf0;
+    margin-bottom: 40px;
+}
+
+h2 {
+    color: #7028c5;
+    margin-bottom: 20px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #8439d1;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+    margin-top: 15px;
+}
+
+.full {
+    grid-column: 1 / -1;
+}
+
+.primary-btn {
+    background: #7028c5;
+    color: white;
+    padding: 13px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.primary-btn:hover {
+    background: #541a98;
+}
+
+/* SEARCH */
+.search-area {
+    display: flex;
+    gap: 12px;
+    margin: 25px 0;
+}
+
+.search-area input {
+    flex: 2;
+}
+
+.search-area select {
+    flex: 1;
+}
+
+/* JOB CARDS */
+.jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 22px;
+}
+
+.job-card {
+    background: white;
+    padding: 23px;
+    border-radius: 13px;
+    border: 1px solid #eee5fa;
+    box-shadow: 0 3px 12px #e9e0f1;
+    transition: 0.3s;
+}
+
+.job-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 22px #d9c5ee;
+}
+
+.job-card h3 {
+    color: #7028c5;
+    margin-bottom: 10px;
+}
+
+.company {
+    font-weight: bold;
+    color: #554766;
+    margin-bottom: 12px;
+}
+
+.job-info {
+    font-size: 14px;
+    color: #777;
+    margin: 8px 0;
+}
+
+.tag {
+    display: inline-block;
+    background: #f0e5ff;
+    color: #7028c5;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin: 10px 0;
+}
+
+.card-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.card-buttons button {
+    padding: 9px 13px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.view-btn {
+    background: #7028c5;
+    color: white;
+}
+
+.delete-btn {
+    background: #ffe8e8;
+    color: #c62828;
+}
+
+.empty {
+    text-align: center;
+    padding: 35px;
+    color: #888;
+    grid-column: 1 / -1;
+}
+
+/* FOOTER */
+footer {
+    background: #32134f;
+    color: white;
+    text-align: center;
+    padding: 25px;
+    margin-top: 60px;
+}
+
+@media(max-width: 650px) {
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav a {
+        margin: 0 8px;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full {
+        grid-column: auto;
+    }
+
+    .search-area {
+        flex-direction: column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">JobSphere</div>
+    <div>
+        <a href="#home">Home</a>
+        <a href="#jobs">Find Jobs</a>
+        <a href="#post">Post a Job</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <h1>Find Your Dream Job Today!</h1>
+    <p>Discover opportunities. Connect with employers. Build your future.</p>
+    <button onclick="document.getElementById('post').scrollIntoView({behavior:'smooth'})">
+        Post a Job
+    </button>
+</section>
+
+<div class="container">
+
+<!-- POST JOB FORM -->
+<section class="form-section" id="post">
+    <h2>+ Post a Job Advertisement</h2>
+
+    <form id="jobForm">
+        <div class="form-grid">
+
+            <input type="text" id="title"
+                placeholder="Job Title" required>
+
+            <input type="text" id="company"
+                placeholder="Company Name" required>
+
+            <input type="text" id="location"
+                placeholder="Job Location" required>
+
+            <input type="text" id="salary"
+                placeholder="Salary (e.g. Rs. 50,000/month)" required>
+
+            <select id="category" required>
+                <option value="">Select Job Category</option>
+                <option>Technology</option>
+                <option>Marketing</option>
+                <option>Design</option>
+                <option>Finance</option>
+                <option>Education</option>
+                <option>Healthcare</option>
+                <option>Customer Service</option>
+                <option>Other</option>
+            </select>
+
+            <select id="type" required>
+                <option value="">Job Type</option>
+                <option>Full Time</option>
+                <option>Part Time</option>
+                <option>Remote</option>
+                <option>Internship</option>
+                <option>Contract</option>
+            </select>
+
+            <textarea id="description"
+                class="full"
+                placeholder="Write job description and requirements..."
+                required></textarea>
+
+        </div>
+
+        <button type="submit" class="primary-btn">
+            Publish Advertisement
+        </button>
+    </form>
+</section>
+
+<!-- JOB LISTINGS -->
+<section id="jobs">
+    <h2>Explore Latest Job Opportunities</h2>
+
+    <div class="search-area">
+        <input type="text" id="search"
+            placeholder="Search job title or company..."
+            oninput="displayJobs()">
+
+        <select id="filter" onchange="displayJobs()">
+            <option value="">All Categories</option>
+            <option>Technology</option>
+            <option>Marketing</option>
+            <option>Design</option>
+            <option>Finance</option>
+            <option>Education</option>
+            <option>Healthcare</option>
+            <option>Customer Service</option>
+            <option>Other</option>
+        </select>
+    </div>
+
+    <div class="jobs-grid" id="jobsContainer"></div>
+</section>
+
+</div>
+
+<footer>
+    <h3>JobSphere</h3>
+    <p>Your Career, Your Future.</p>
+    <p>© 2026 JobSphere. All Rights Reserved.</p>
+</footer>
+
+<script>
+
+// SAMPLE JOBS
+let jobs = JSON.parse(localStorage.getItem("jobs")) || [
+    {
+        id: 1,
+        title: "Web Developer",
+        company: "Tech Solutions",
+        location: "Islamabad",
+        salary: "Rs. 80,000/month",
+        category: "Technology",
+        type: "Full Time",
+        description: "Looking for a creative web developer with HTML, CSS and JavaScript skills."
+    },
+    {
+        id: 2,
+        title: "Graphic Designer",
+        company: "Creative Studio",
+        location: "Lahore",
+        salary: "Rs. 45,000/month",
+        category: "Design",
+        type: "Part Time",
+        description: "Create attractive graphics, social media posts and branding designs."
+    },
+    {
+        id: 3,
+        title: "Digital Marketing Intern",
+        company: "Digital World",
+        location: "Remote",
+        salary: "Rs. 25,000/month",
+        category: "Marketing",
+        type: "Internship",
+        description: "Help manage social media campaigns and marketing activities."
+    }
+];
+
+// SAVE JOBS
+function saveJobs() {
+    localStorage.setItem("jobs", JSON.stringify(jobs));
+}
+
+// POST NEW JOB
+document.getElementById("jobForm").addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    let newJob = {
+        id: Date.now(),
+        title: document.getElementById("title").value.trim(),
+        company: document.getElementById("company").value.trim(),
+        location: document.getElementById("location").value.trim(),
+        salary: document.getElementById("salary").value.trim(),
+        category: document.getElementById("category").value,
+        type: document.getElementById("type").value,
+        description: document.getElementById("description").value.trim()
+    };
+
+    jobs.unshift(newJob);
+
+    saveJobs();
+
+    displayJobs();
+
+    this.reset();
+
+    alert("Your job advertisement has been published!");
+    
+    document.getElementById("jobs").scrollIntoView({
+        behavior: "smooth"
+    });
+
+});
+
+// DISPLAY JOBS
+function displayJobs() {
+
+    let container = document.getElementById("jobsContainer");
+
+    let search = document.getElementById("search")
+        .value.toLowerCase();
+
+    let filter = document.getElementById("filter").value;
+
+    let filteredJobs = jobs.filter(job => {
+
+        let matchesSearch =
+            job.title.toLowerCase().includes(search) ||
+            job.company.toLowerCase().includes(search);
+
+        let matchesCategory =
+            filter === "" || job.category === filter;
+
+        return matchesSearch && matchesCategory;
+    });
+
+    container.innerHTML = "";
+
+    if (filteredJobs.length === 0) {
+        container.innerHTML =
+            '<div class="empty">No jobs found. Try another search!</div>';
+        return;
+    }
+
+    filteredJobs.forEach(job => {
+
+        let card = document.createElement("div");
+        card.className = "job-card";
+
+        let heading = document.createElement("h3");
+        heading.textContent = job.title;
+
+        let company = document.createElement("p");
+        company.className = "company";
+        company.textContent = job.company;
+
+        let details = document.createElement("div");
+        details.className = "job-info";
+        details.textContent =
+            "📍 " + job.location + " | 💰 " + job.salary;
+
+        let category = document.createElement("span");
+        category.className = "tag";
+        category.textContent = job.category;
+
+        let type = document.createElement("p");
+        type.className = "job-info";
+        type.textContent = "Job Type: " + job.type;
+
+        let buttons = document.createElement("div");
+        buttons.className = "card-buttons";
+
+        let viewButton = document.createElement("button");
+        viewButton.className = "view-btn";
+        viewButton.textContent = "View Details";
+        viewButton.onclick = () => viewJob(job.id);
+
+        let deleteButton = document.createElement("button");
+        deleteButton.className = "delete-btn";
+        deleteButton.textContent = "Delete";
+        deleteButton.onclick = () => deleteJob(job.id);
+
+        buttons.append(viewButton, deleteButton);
+
+        card.append(
+            heading, company, details,
+            category, type, buttons
+        );
+
+        container.appendChild(card);
+    });
+}
+
+// VIEW JOB DETAILS
+function viewJob(id) {
+
+    let job = jobs.find(j => j.id === id);
+
+    if (job) {
+        alert(
+            "JOB DETAILS\n\n" +
+            "Title: " + job.title +
+            "\nCompany: " + job.company +
+            "\nLocation: " + job.location +
+            "\nSalary: " + job.salary +
+            "\nCategory: " + job.category +
+            "\nType: " + job.type +
+            "\n\nDescription:\n" + job.description
+        );
+    }
+}
+
+// DELETE JOB
+function deleteJob(id) {
+
+    if (confirm("Are you sure you want to delete this advertisement?")) {
+
+        jobs = jobs.filter(job => job.id !== id);
+
+        saveJobs();
+
+        displayJobs();
+    }
+}
+
+// INITIAL DISPLAY
+displayJobs();
+
+</script>
+
+</body>
+</html>
